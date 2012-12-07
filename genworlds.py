@@ -1,9 +1,8 @@
 import itertools
-from pprint import pprint
 
-truthvalues=[0,1]
+truthvalues=[1,0]
 
-def genworlds(lang): # generate all possible worlds for some propositions
+def worldgen(lang): # generate all possible worlds for some propositions
     result=[]
     worldname=0
     truthtable = itertools.product(truthvalues, repeat=len(lang))
@@ -19,9 +18,3 @@ def genworlds(lang): # generate all possible worlds for some propositions
 	    world["values"][lang[j]]=line[j]
 	result.append(world)
     return result
-
-language=['p', 'q', 'r', 's']
-
-worlds=genworlds(language)
-
-pprint(worlds)
