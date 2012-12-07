@@ -1,1 +1,1 @@
-Countingg counterfactuals, factually.
+Counting counterfactuals, factually.
