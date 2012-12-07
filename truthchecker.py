@@ -1,4 +1,9 @@
 def chop(formula): # count brackets to get main connective and return subformulas
+    """
+    INPUT: a formula
+    OUTPUT: result as a triple: (connective, subleft, subright)
+    WHAT IT DOES: Finds the main connective by counting brackets. It returns the two (or in case of negation: one) subformulas and the connective.
+    """
     min_pcount, pcount = 10000, 0
     conpos=0
     pos=0
