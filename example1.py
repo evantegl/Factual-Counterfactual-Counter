@@ -2,8 +2,7 @@ from pprint import pprint
 from genworlds import *
 from truthchecker import *
 
-
-language=['p', 'q','r']
+language=['p', 'q', 'r']
 
 worlds=worldgen(language)
 

@@ -1,5 +1,4 @@
 import itertools
-from pprint import pprint
 
 truthvalues=[1,0]
 
