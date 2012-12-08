@@ -4,3 +4,6 @@
 # LaTeX
 *.log
 *.aux
+
+# Misc
+*.kate-swp
