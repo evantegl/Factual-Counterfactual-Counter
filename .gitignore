@@ -1,0 +1,9 @@
+# python
+*.pyc
+
+# LaTeX
+*.log
+*.aux
+
+# Misc
+*.kate-swp
