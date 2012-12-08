@@ -48,17 +48,71 @@ def basisOfWorld(situation, worldname, cogstate):
 			return False
 	return True
 
+def getAllBases(world, cogstate):
+	"""
+	INPUT: a world and a cognitive state
+	OUTPUT: an array of situations that are bases
+	WHAT IT DOES: finds all the bases for a world in a cognitive
+	state.
+	"""
+	bases = []
+	for situation in sitgen(world):
+		if basisOfWorld(situation, world[meta][name], cogstate):
+			bases.append(situation)
+	return bases
+
 def test():
-	language=['p','q','r']
+	language=['p','q','r','s']
 	s0=worldgen(language)
 	s1=updateFormula(s0, "r")
 	s2=updateLaw(s1, "(r)>((p)|(q))")
 	situation = {
 		'p': True
 	}
-	pprint("Result 1:")
-	pprint(Forceable(situation, [s2[5][meta][name], s2[4][meta][name], s2[6][meta][name], s2[7][meta][name]], s2))
-	pprint("Result 2:")
-	pprint(Forceable(situation, ["w_5", "w_4", "w_6", "w_7"], s2))
+	# pprint("Result 1:")
+	# pprint(Forceable(situation, [s2[5][meta][name], s2[4][meta][name], s2[6][meta][name], s2[7][meta][name]], s2))
+	# pprint("Result 2:")
+	# pprint(Forceable(situation, ["w_5", "w_4", "w_6", "w_7"], s2))
+	w0 = {
+		meta: {
+			name: "w0",
+			FS: True,
+			US: True
+		},
+		values: {
+			'p': True,
+			'q': False,
+			'r': False,
+			's': True
+		}
+	}
+	w1 = {
+		meta: {
+			name: "w1",
+			FS: True,
+			US: True
+		},
+		values: {
+			'p': False,
+			'q': True,
+			'r': False,
+			's': False
+		}
+	}
+	w2 = {
+		meta: {
+			name: "w2",
+			FS: True,
+			US: True
+		},
+		values: {
+			'p': False,
+			'q': False,
+			'r': True,
+			's': True
+		}
+	}
+	cogstate = [w0, w1, w2]
+	pprint(getAllBases(w0, cogstate))
 
 # test()
