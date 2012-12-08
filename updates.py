@@ -81,22 +81,3 @@ def updateLaw(cogstate, law):
 	else:
 		newstate = destroyAllWorlds(cogstate)
 	return newstate
-
-def basisOfWorld(worldname,cogstate):
-	"""
-	INPUT: a pair (worldname, cognitive state)
-	OUTPUT: an array of bases
-	WHAT IT DOES:
-	"""
-	return False
-
-def retractOnWorld(cogstate,worldname,formula):
-	"""
-	INPUT: a triple (cognitive state, worldname, law)
-	OUTPUT: another cognitive state
-	WHAT IT DOES:
-	"""
-	return False
-
-def retractOnState(cogstate,formula):
-	return False
