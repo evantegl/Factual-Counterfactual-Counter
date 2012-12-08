@@ -12,4 +12,4 @@ def ifItHadBeenTheCase(cogstate, formula):
 	retracts ~\phi and then updates with \phi
 	"""
 	# It's so pretty!
-	return update(retract(proposition(lnot(formula))), formula)
+	return update(retract(cogstate,proposition(cogstate,lnot(formula))), formula)

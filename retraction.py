@@ -1,4 +1,3 @@
-from pprint import pprint
 from genworlds import sitgen
 from basis import getAllBases,Forceable
 from utilities import subset, getWorldByName
@@ -13,19 +12,12 @@ def retractOnWorld(cogstate,worldname,proposition):
 	result=[]
 	world=getWorldByName(worldname,cogstate)
 	for situation in sitgen(world): # s
-		#print ""
-		#pprint(situation)
 		if Forceable(situation, proposition, cogstate):
-			#print "BAD: does force the proposition"
 			continue # s may not force P
-		#print "NICE: does not force the proposition"
 		adding=False
 		for basis in getAllBases(world,cogstate): # s'
-			#print "  checking this basis:"
-			#pprint(basis)
 			if not subset(situation,basis):
 				continue # s is has to be a subset of s'
-			#print "  it is a subset!"
 			Maximal=True
 			for t in subsitgen(basis):
 				if Forceable(situation, proposition, cogstate):
@@ -34,14 +26,10 @@ def retractOnWorld(cogstate,worldname,proposition):
 					if situation != t:
 						Maximal=False
 			if not Maximal:
-				#print "  but it is not maximal!"
 				continue # s should be a maximal subset of s'
-			#print "  and it is maximal!"
 			adding=True
 		if adding:
 			result.append(situation)
-		#print "added."
-	#print ""
 	return result
 
 def retractOnState(cogstate,proposition):
@@ -52,24 +40,19 @@ def retractOnState(cogstate,proposition):
 	"""
 	result=[]
 	for world in cogstate:
-		newworld=world
-		print "\n\nnow checking this world:"
-		pprint(world)
+		newworld={}  # do not shoot ourselves in the foot
+		newworld["values"]=dict(world["values"])
+		newworld["meta"]=dict(world["meta"])
 		addingToFS=False
 		if world["meta"]["US"]:
 			for biworld in cogstate:
-				pprint(biworld)
 				if biworld["meta"]["FS"]:
 					biretract=retractOnWorld(cogstate,biworld["meta"]["name"],proposition)
 					for s in biretract:
 						if subset(s,world):
-							print "  found this subset which is in the retraction of "+biworld["meta"]["name"]+":"
-							pprint(s)
 							addingToFS=True
 		newworld["meta"]["FS"]=addingToFS
-		result.append(newworld)
-
-	print ""
+		result.append(dict(newworld))
 	return result
 
 
