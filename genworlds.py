@@ -2,10 +2,16 @@ import itertools
 
 truthvalues=[0,1]
 
-def worldgen(lang): # generate all possible worlds for some propositions
+def worldgen(language): #
+  	"""
+	INPUT: a language
+	OUTPUT: a cognitive state
+	WHAT IT DOES: generates the neutral coginitve state which includes
+		all 2^n possible worlds for n propositions.
+	"""
 	result=[]
 	worldname=-1
-	truthtable = itertools.product(truthvalues, repeat=len(lang))
+	truthtable = itertools.product(truthvalues, repeat=len(language))
 	for line in truthtable:
 		worldname=worldname+1
 		world={}
@@ -14,7 +20,25 @@ def worldgen(lang): # generate all possible worlds for some propositions
 		world["meta"]["name"]="w_"+str(worldname)
 		world["meta"]["US"]=True
 		world["meta"]["FS"]=True
-		for j in range(len(lang)):
-			world["values"][lang[j]]=line[j]
+		for j in range(len(language)):
+			world["values"][language[j]]=line[j]
 		result.append(world)
+	return result
+
+def sitgen(world,language):
+  	"""
+	INPUT: a pair (world, language)
+	OUTPUT: an array of situations
+	WHAT IT DOES: generates all 2^n situations which are a subset of
+		the world where n is the number of propositions.
+	"""
+	result=[]
+	n=len(language)
+	truthtable = itertools.product([True,False], repeat=n)
+	for line in truthtable:
+		situation={}
+		for i in range(n):
+			if line[i]:
+				situation[language[i]]=world["values"][language[i]]
+		result.append(situation)
 	return result
