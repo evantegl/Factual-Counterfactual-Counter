@@ -42,3 +42,25 @@ def sitgen(world,language):
 				situation[language[i]]=world["values"][language[i]]
 		result.append(situation)
 	return result
+
+def subsitgen(situation):
+  	"""
+	INPUT: a situation
+	OUTPUT: an array of situations
+	WHAT IT DOES: generates all 2^m - 1 proper subsituations
+		where m is the number of facts in the situation.
+	"""
+	result=[]
+	situation = situation.items() # convert the dictionary to an array
+	m=len(situation)
+	truthtable = itertools.product([True,False], repeat=m)
+	for line in truthtable:
+		subsituation={}
+		for i in range(m):
+			if line[i]:
+				subsituation[situation[i][0]]=situation[i][1]
+		result.append(subsituation)
+	result.pop(0)
+	return result
+
+
