@@ -7,7 +7,10 @@ def texheader(title,author=""):
     \\maketitle\n"""
     return lines
 
-def texify(cogstate,language):
+def texify(cogstate):
+    # define the language
+    language = cogstate[0]['values'].keys()
+    # the main stuff
     lines="""\\begin{tabular}{|c|"""+('c'*len(language))+"""|}
     \\hline \n             """
     for prop in language:
