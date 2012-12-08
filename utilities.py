@@ -29,6 +29,12 @@ def subset(situation, world):
 				return False
 		return True
 
+def getWorldByName(worldname,cogstate):
+	for world in cogstate:
+		if world["meta"]["name"]==worldname:
+			return world
+	return False #this should never happen
+
 def test():
 	situation = {
 		'p': True,
