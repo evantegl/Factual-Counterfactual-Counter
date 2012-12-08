@@ -17,11 +17,17 @@ def subset(situation, world):
 	WHAT IT DOES: tells you whether the situation
 	is a subset of the world.
 	"""
-
-	for pair in situation.items():
-		if pair not in world[values].items():
-			return False
-	return True
+	if values not in world.keys():
+		for pair in situation.items():
+			if pair not in world.items():
+				return False
+		return True
+	# otherwise, the second argument is a situation
+	else:
+		for pair in situation.items():
+			if pair not in world[values].items():
+				return False
+		return True
 
 def test():
 	situation = {
@@ -36,7 +42,7 @@ def test():
 		},
 		values: {
 			'p': True,
-			'q': True,
+			'q': False,
 			'r': False,
 			's': True
 		}
