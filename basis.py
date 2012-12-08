@@ -3,7 +3,7 @@ from pprint import pprint
 from truthchecker import tiw as formulaIsTrue
 from utilities import subset
 from updates import updateFormula, updateLaw
-from genworlds import worldgen, sitgen
+from genworlds import worldgen, sitgen, subsitgen
 
 # variables
 meta = 'meta'
@@ -27,19 +27,26 @@ def Forceable(situation, proposition, cogstate):
 					return False
 	return True
 
-def Determines(situation, world, cogstate):
+def Determines(situation, worldname, cogstate):
 	"""
 	This is easy
 	"""
-	return Forceable(situation, [world], cogstate)
+	return Forceable(situation, [worldname], cogstate)
 
-def basisOfWorld(worldname,cogstate):
+def basisOfWorld(situation, worldname, cogstate):
 	"""
 	INPUT: a pair (worldname, cognitive state)
 	OUTPUT: an array of bases
-	WHAT IT DOES:
+	WHAT IT DOES: check if worldname
 	"""
-	return False
+	if not Determines(situation, worldname, cogstate):
+		return False
+	# now check whether its minimal:
+	subsituations=subsitgen(situation)
+	for subsituation in subsituations:
+		if Determines(subsituation, worldname, cogstate):
+			return False
+	return True
 
 def test():
 	language=['p','q','r']

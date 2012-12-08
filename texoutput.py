@@ -9,15 +9,15 @@ def texheader(title,author=""):
 
 def texify(cogstate,language):
     lines="""\\begin{tabular}{|c|"""+('c'*len(language))+"""|}
-    \\hline \n          """
+    \\hline \n             """
     for prop in language:
       lines = lines + " & $"+prop+"$"
     lines = lines + " \\\\ \n    \hline \n"
     for world in cogstate:
       if not world["meta"]["US"]:
-        lines=lines+"       \sout{$"+str(world["meta"]["name"])+"$}"
+        lines=lines+"\sout{$"+str(world["meta"]["name"])+"$}"
       elif world["meta"]["FS"]:
-	lines=lines+"       $|"+str(world["meta"]["name"])+"$"
+	lines=lines+"      $|"+str(world["meta"]["name"])+"$"
       else:
 	lines=lines+"       $"+str(world["meta"]["name"])+"$"
       for prop in language:

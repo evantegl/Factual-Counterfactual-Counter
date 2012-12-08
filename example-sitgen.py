@@ -13,7 +13,7 @@ situationlist=sitgen(cogstate[2],language)
 
 pprint(situationlist)
 
-print "generating all proper subsituations of a situation:"
+print "\ngenerating all proper subsituations of a situation:"
 
 sit = {'p': 0, 'q': 1, 'r': 0}
 
