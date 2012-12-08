@@ -18,22 +18,15 @@ def subset(situation, world):
 	is a subset of the world.
 	"""
 
-	for pair in situation[values].items():
+	for pair in situation.items():
 		if pair not in world[values].items():
 			return False
 	return True
 
 def test():
 	situation = {
-		meta: {
-			name: "something",
-			FS: True,
-			US: True
-		},
-		values: {
-			'p': True,
-			'q': True
-		}
+		'p': True,
+		'q': True
 	}
 	world = {
 		meta: {
@@ -42,7 +35,7 @@ def test():
 			US: False
 		},
 		values: {
-			'p': False,
+			'p': True,
 			'q': True,
 			'r': False,
 			's': True
@@ -50,4 +43,4 @@ def test():
 	}
 	pprint(subset(situation, world))
 
-test()
+# test()
