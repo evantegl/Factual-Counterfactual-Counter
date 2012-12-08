@@ -45,4 +45,38 @@ def retractOnWorld(cogstate,worldname,proposition):
 	return result
 
 def retractOnState(cogstate,proposition):
-	return False
+	"""
+	INPUT: a pair (cognitive state, proposition)
+	OUTPUT: cognitive state
+	WHAT IT DOES: Definition 4 (ii)
+	"""
+	result=[]
+	for world in cogstate:
+		newworld=world
+		print "\n\nnow checking this world:"
+		pprint(world)
+		addingToFS=False
+		if world["meta"]["US"]:
+			for biworld in cogstate:
+				pprint(biworld)
+				if biworld["meta"]["FS"]:
+					biretract=retractOnWorld(cogstate,biworld["meta"]["name"],proposition)
+					for s in biretract:
+						if subset(s,world):
+							print "  found this subset which is in the retraction of "+biworld["meta"]["name"]+":"
+							pprint(s)
+							addingToFS=True
+		newworld["meta"]["FS"]=addingToFS
+		result.append(newworld)
+
+	print ""
+	return result
+
+
+
+
+
+
+
+
+
