@@ -35,6 +35,9 @@ def getWorldByName(worldname,cogstate):
 			return world
 	return False #this should never happen
 
+def negateFormula(formula):
+	return "~(" + formula + ")"
+
 def test():
 	situation = {
 		'p': True,
