@@ -25,13 +25,16 @@ def worldgen(language): #
 		result.append(world)
 	return result
 
-def sitgen(world,language):
+def sitgen(world):
   	"""
 	INPUT: a pair (world, language)
 	OUTPUT: an array of situations
 	WHAT IT DOES: generates all 2^n situations which are a subset of
 		the world where n is the number of propositions.
 	"""
+	# Reconstruct the language from the world
+	language = world["values"].keys()
+	#Main stuff
 	result=[]
 	n=len(language)
 	truthtable = itertools.product([True,False], repeat=n)
