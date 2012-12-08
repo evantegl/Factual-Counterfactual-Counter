@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt,parskip=half]{scrartcl}
+    \title{Hansson's Hamburger puzzle}
+    \author{The factual counterfactual checker}
+    \usepackage{ulem}
+    \begin{document}
+    \maketitle
+Let $p$, $q$ and $r$ stand for the facts that we saw the man with the hamburger, snackbar A is open and snackbar B is open, respectively.
+
+0. The neutral cognitive state:\\\begin{tabular}{|c|ccc|}
+    \hline 
+           & $p$ & $q$ & $r$ \\ 
+    \hline 
+       $|w_0$  &  0  &  0  &  0  \\ 
+       $|w_1$  &  0  &  0  &  1  \\ 
+       $|w_2$  &  0  &  1  &  0  \\ 
+       $|w_3$  &  0  &  1  &  1  \\ 
+       $|w_4$  &  1  &  0  &  0  \\ 
+       $|w_5$  &  1  &  0  &  1  \\ 
+       $|w_6$  &  1  &  1  &  0  \\ 
+       $|w_7$  &  1  &  1  &  1  \\ 
+    \hline
+    \end{tabular}
+
+1. We update with the fact $ r $:\\\begin{tabular}{|c|ccc|}
+    \hline 
+           & $p$ & $q$ & $r$ \\ 
+    \hline 
+       $w_0$  &  0  &  0  &  0  \\ 
+       $|w_1$  &  0  &  0  &  1  \\ 
+       $w_2$  &  0  &  1  &  0  \\ 
+       $|w_3$  &  0  &  1  &  1  \\ 
+       $w_4$  &  1  &  0  &  0  \\ 
+       $|w_5$  &  1  &  0  &  1  \\ 
+       $w_6$  &  1  &  1  &  0  \\ 
+       $|w_7$  &  1  &  1  &  1  \\ 
+    \hline
+    \end{tabular}
+
+2. We update with the law that hamburgers must have been bought somewhere:$ r \to ( p \lor q ) $:\\\begin{tabular}{|c|ccc|}
+    \hline 
+           & $p$ & $q$ & $r$ \\ 
+    \hline 
+       $w_0$  &  0  &  0  &  0  \\ 
+       \sout{$w_1$}  &  0  &  0  &  1  \\ 
+       $w_2$  &  0  &  1  &  0  \\ 
+       $|w_3$  &  0  &  1  &  1  \\ 
+       $w_4$  &  1  &  0  &  0  \\ 
+       $|w_5$  &  1  &  0  &  1  \\ 
+       $w_6$  &  1  &  1  &  0  \\ 
+       $|w_7$  &  1  &  1  &  1  \\ 
+    \hline
+    \end{tabular}
+\end{document}

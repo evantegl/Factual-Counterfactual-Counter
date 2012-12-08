@@ -1,12 +1,11 @@
 ##### Import all the functions we need #####
 from pprint import pprint
+from truthchecker import tiw as formulaIsTrue
 
 ##### Set up our metavariables, whatever they are #####
 meta = "meta"
 FS = "FS"
 US = "US"
-def formulaIsTrue(world, formula):
-	return not world[meta][FS]
 
 # Main functions defined in here
 def formulaIsConsistent(cogstate, formula):
@@ -73,7 +72,7 @@ def updateLaw(cogstate, law):
 		US or FS.
 	"""
 	newstate = []
-	if formulaIsConsistent(cogstate, formula):
+	if formulaIsConsistent(cogstate, law):
 		for world in cogstate:
 			if not formulaIsTrue(world, law):
 				world[meta][FS] = False
@@ -82,32 +81,3 @@ def updateLaw(cogstate, law):
 	else:
 		newstate = destroyAllWorlds(cogstate)
 	return newstate
-
-w0 = {
-	'meta': {
-		'name': "w0",
-		'FS': True,
-		'US': True
-	},
-	'values': {
-		'p': True,
-		'q': True,
-		'r': True
-	}
-}
-w1 = {
-	'meta': {
-		'name': "w0",
-		'FS': False,
-		'US': True
-	},
-	'values': {
-		'p': True,
-		'q': True,
-		'r': True
-	}
-}
-cogstate = [w0, w0, w1, w0, w0, w0]
-# newcogstate = updateFormula(cogstate, "")
-newcogstate = formulaIsConsistent(cogstate, "")
-pprint(newcogstate)
