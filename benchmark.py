@@ -9,8 +9,8 @@ from random import choice
 from utilities import supports
 from timeit import timeit
 import time
+import sys
 
-import time
 
 class Timer:
     def __enter__(self):
@@ -43,16 +43,21 @@ def checkRandomSituation(cogstate):
 
 string="abcdefghijklmnopqrstuvwxyz" #52
 
-for i in range(2,6):
-	print "now we consider "+str(i)+" propositions"
+for i in range(2,10):
+	print "Let's consider "+str(i)+" propositions"
 	alphabet=list(string[:i])
 	W = worldgen(alphabet)
-	print "  generated all worlds."
-	print "  now checking 50 random situations"
+	print "  Generated all worlds."
+	print "  Now we'll check 1000 random counterfactuals in random situations"
+	sys.stdout.write(' ')
 	with Timer() as t:
-		for k in range(100): # do this a hundred times.
-			checkRandomSituation(W)
-	print('  This took %.03f sec.' % t.interval)
+		for k in range(10): # do this a lot of times.
+			for m in range(100): # do this a lot of times.
+				checkRandomSituation(W)
+			sys.stdout.write(" . ")
+			sys.stdout.flush()
+			#print "."
+	print('\n  This took %.03f sec.' % t.interval)
 	print ""
 
 
