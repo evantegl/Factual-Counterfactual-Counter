@@ -59,4 +59,4 @@ def test():
 	cogstate = [u, v]
 	pprint(propositionFromFormula(cogstate, "(p)|(q)"))
 
-test()
+# test()
