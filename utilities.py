@@ -2,7 +2,8 @@
 
 # imports
 from pprint import pprint
-
+from updates import updateFormula
+from truthchecker import tiw as formulaIsTrue
 # variables
 meta = 'meta'
 values = 'values'
@@ -37,6 +38,14 @@ def getWorldByName(worldname,cogstate):
 
 def negateFormula(formula):
 	return "~(" + formula + ")"
+
+def supports(cogstate,formula):
+	result = True
+	for world in cogstate:
+		if world[meta][FS]:
+			if not formulaIsTrue(world, formula):
+				result = False
+	return result
 
 def test():
 	situation = {
