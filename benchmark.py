@@ -21,7 +21,7 @@ class Timer:
         self.end = time.clock()
         self.interval = self.end - self.start
 
-def checkRandomSituation(cogstate):
+def checkRandomCounterfactual(cogstate):
 	# generate a random law and update with it:
 	law="("+choice(alphabet)+")>("+choice(alphabet)+")"
 	#print "  updating with the law "+law
@@ -39,7 +39,27 @@ def checkRandomSituation(cogstate):
 	cfconsequent=choice(restralph)
 	#print "  checking the counterfactual "+cfantecedent+"~>"+cfconsequent+":"
 	cogstateNew = ifItHadBeenTheCase(cogstate, cfantecedent)
-	#print "  supported: " + str(supports(cogstateNew,cfconsequent))
+	result=supports(cogstateNew,cfconsequent)
+
+def checkRandomImplication(cogstate):
+  	# generate a random law and update with it:
+	law="("+choice(alphabet)+")>("+choice(alphabet)+")"
+	#print "  updating with the law "+law
+	cogstate = updateLaw(cogstate,law)
+
+	# generate a random fact and update with it:
+	fact=choice(alphabet)
+	#print "  updating with the fact "+fact
+	cogstate = updateFormula(cogstate,fact)
+
+	# generate a random non-trivial implication and check it:
+	imantecedent=choice(alphabet)
+	restralph=list(alphabet)
+	restralph.remove(imantecedent)
+	imconsequent=choice(restralph)
+	#print "  checking the implication "imantecedent+"->"imconsequent+":"
+	cogstateNew = updateLaw(cogstate, imantecedent)
+	result = supports(cogstateNew,imconsequent)
 
 string="abcdefghijklmnopqrstuvwxyz" #52
 
@@ -47,17 +67,30 @@ for i in range(2,10):
 	print "Let's consider "+str(i)+" propositions"
 	alphabet=list(string[:i])
 	W = worldgen(alphabet)
-	print "  Generated all worlds."
-	print "  Now we'll check 1000 random counterfactuals in random situations"
+	print "  Generated all worlds. Now we'll check 1000 random implications in random situations"
 	sys.stdout.write(' ')
 	with Timer() as t:
 		for k in range(10): # do this a lot of times.
 			for m in range(100): # do this a lot of times.
-				checkRandomSituation(W)
+				checkRandomImplication(W)
 			sys.stdout.write(" . ")
 			sys.stdout.flush()
 			#print "."
 	print('\n  This took %.03f sec.' % t.interval)
 	print ""
 
-
+for i in range(2,10):
+	print "Let's consider "+str(i)+" propositions"
+	alphabet=list(string[:i])
+	W = worldgen(alphabet)
+	print "  Generated all worlds. Now we'll check 1000 random counterfactuals in random situations"
+	sys.stdout.write(' ')
+	with Timer() as t:
+		for k in range(10): # do this a lot of times.
+			for m in range(100): # do this a lot of times.
+				checkRandomCounterfactual(W)
+			sys.stdout.write(" . ")
+			sys.stdout.flush()
+			#print "."
+	print('\n  This took %.03f sec.' % t.interval)
+	print ""
